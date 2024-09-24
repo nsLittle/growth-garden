@@ -1,0 +1,9 @@
+body {
+  background-color: gray;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
