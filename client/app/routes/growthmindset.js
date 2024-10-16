@@ -1,11 +1,8 @@
 'use client';
-import React from "react";
 import { useState, useEffect } from "react";
-import Home from "./routes/home";
-import GrowthMindSet from "./routes/growthmindset";
-import "./globals.css";
+import "../globals.css"; 
 
-export default function App() {
+export default function GrowthMindSet() {
   const [ramble, setRamble] = useState('');
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
@@ -38,11 +35,33 @@ export default function App() {
     }
   }, [prompt]);
 
+  const handleThoughts = (e) => {
+    const thought = e.target.value;
+    console.log(thought);
+    setPrompt(thought);
+  }
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(prompt);
+    fetchResponse();
+  };
+
   return (
     <div>
-      <Home />
-      <GrowthMindSet ramble={ramble} setRamble={setRamble} prompt={prompt} setPrompt={setPrompt} response={response} handleSubmit={fetchResponse}  />
+      <h2 className="sub-title">Growth Mind Set Reframer</h2>
+      <div className="growthmindset-box">
+        <div>
+          <input className="growthmindset-input" value={prompt} placeholder="Your thoughts" onChange={handleThoughts}>
+          </input>
+          <button type="submit" onClick={handleClick}>Reframe</button>
+        </div>
+        
+        <div className="growthmindset-response">
+        {response && <h3>{response}</h3>}
+        </div>
 
+      </div>
     </div>
   );
 }
