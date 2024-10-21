@@ -18,14 +18,27 @@ This simple application ...
 
 # How to Run App
 
-1.
+1. type: brew-start
+2. type: mongosh
+3. find client folder
+4. type: npm run dev
+5. go to root folder
+6. type: npm run dev
 
-# Things to Add/Edit
+# Deliverables
 
 1. React FE, Redux is optional
 2. Express BE
 3. CRUD functionality
 4. Authentication
 5. Integrate w/ 3-party API => Apple Health API; OpenAI
-6. Must be deployed live
+6. Must be deployed live - https://www.hostinger.com/?REFERRALCODE=1WILLIAM7977
 7. Have hosted database
+
+# To Do
+
+1. Goal Declaration
+2. Drink Counter
+3. Login
+4. Footer (like portfolio)
+5. Save button for optional saving of /growthmindset input and responses (for authorized users only)

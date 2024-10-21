@@ -1,23 +1,76 @@
 body {
-  background-color: gray;
+  background-color: white;
+}
+
+.home-banner {
+  background-image: url("./images/background.1.jpg");
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  padding: 0%;
+  position: relative;
+  border-radius: 25px;
+}
+
+.image {
+  color: white;
+  text-align: right;
+  padding-top: 0px;
+  padding-right: 30px;
+}
+
+.pic-link {
+  color: pink;
 }
 
 .title {
   color: white;
   text-align: center;
   font-size: 60px;
-  margin-top: 50px;
+  margin-top: 10px;
+  padding-top: 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.function-one,
+.function-two,
+.function-three {
+  color: rgb(131, 186, 49);
+  display: inline-block;
+  background-color: rgb(103, 121, 76);
+  border: 2px solid green;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 20px;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.function-one:hover,
+.function-two:hover,
+.function-three:hover {
+  background-color: rgb(83, 101, 56);
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  color: pink;
 }
 
 .sub-title {
-  color: white;
+  color: rgb(22, 89, 22);
   text-align: center;
-  font-size: 24px;
+  font-size: 32px;
   margin-top: 50px;
 }
 
-.growthmindset-box {
-  color: white;
+.growthmindset-input-box {
+  color: rgb(22, 89, 22);
   text-align: center;
 }
 
@@ -26,8 +79,7 @@ input {
 }
 
 .growthmindset-response {
-  font-size: 28px;
-  margin-top: 50px;
-  width: 500px;
-  text-align: center;
+  font-size: 32px;
+  margin-top: 15px;
+  width: 700px;
 }

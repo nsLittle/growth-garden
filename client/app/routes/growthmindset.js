@@ -48,19 +48,17 @@ export default function GrowthMindSet() {
   };
 
   return (
-    <div>
+    <div className='growthmindset'>
       <h2 className="sub-title">Growth Mind Set Reframer</h2>
-      <div className="growthmindset-box">
-        <div>
+      
+      <div className="growthmindset-input-box">
           <input className="growthmindset-input" value={prompt} placeholder="Your thoughts" onChange={handleThoughts}>
           </input>
           <button type="submit" onClick={handleClick}>Reframe</button>
-        </div>
-        
-        <div className="growthmindset-response">
-        {response && <h3>{response}</h3>}
-        </div>
 
+          <div className="growthmindset-response">
+            {response && <h3>{response}</h3>}
+          </div>
       </div>
     </div>
   );
