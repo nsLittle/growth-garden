@@ -7,7 +7,11 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -18,11 +22,11 @@ const openai = new OpenAI({
 });
 
 // cors middleware?
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Authentication, X-Username, X-Password, X-ApiKey",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
-};
+// const CORS_HEADERS = {
+//   "Access-Control-Allow-Origin": "*",
+//   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Authentication, X-Username, X-Password, X-ApiKey",
+//   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
+// };
 
 // basic midleware?
 app.use((req, res, next) => {
@@ -93,7 +97,7 @@ console.log('Password: ', users[0].login.password);
 // LOGIN
 app.post('/login', (req, res) => {
   try {
-    authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization;
     console.log('AuthHeader: ', authHeader);
     if(!authHeader || !authHeader.startsWith('Basic ')) {
       return res.status(401).send({ error: 'Unauthorized' });
@@ -148,10 +152,18 @@ const authenticateJWT = (req, res, next) =>  {
 };
 
 // AUTHENTICATED ROUTES
-app.get('/users', authenticateJWT, (req, res) => {
-  const userNames = users.map(user => user.name.first);
-  res.status(200).json({ users: userNames });
+app.get('/:user', authenticateJWT, (req, res) => {
+  const { user } = req.params;
+
+  const foundUser = users.find(u => u.name.first === user);
+
+  if (!foundUser) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  res.status(200).json({ user: foundUser });
 });
+
 
 const PORT =process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

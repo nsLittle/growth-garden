@@ -16,14 +16,19 @@ This simple application ...
   - README.md
   - server.js
 
-# How to Run App
+# How to Run/Start App
 
-1. type: brew-start
+1. type: brew services start mongodb/brew/mongodb-community@5.0
 2. type: mongosh
 3. find client folder
 4. type: npm run dev
 5. go to root folder
 6. type: npm run dev
+
+# How to End/Stop App
+
+1. enter: ctr + C (twice)
+2. type: brew services stop mongodb/brew/mongodb-community@5.0
 
 # Deliverables
 

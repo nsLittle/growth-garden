@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
+import Home from "./home";
 import "../globals.css"; 
 
 export default function GrowthMindSet() {
@@ -45,21 +46,26 @@ export default function GrowthMindSet() {
     e.preventDefault();
     console.log(prompt);
     fetchResponse();
+
+    // save response to BE under :user
   };
 
   return (
-    <div className='growthmindset'>
-      <h2 className="sub-title">Growth Mind Set Reframer</h2>
-      
-      <div className="growthmindset-input-box">
-          <input className="growthmindset-input" value={prompt} placeholder="Your thoughts" onChange={handleThoughts}>
-          </input>
-          <button type="submit" onClick={handleClick}>Reframe</button>
+    <>
+      <Home />
+      <div className='growthmindset'>
+        <h2 className="sub-title">Growth Mind Set Reframer</h2>
+        
+        <div className="growthmindset-input-box">
+            <input className="growthmindset-input" value={prompt} placeholder="Your thoughts" onChange={handleThoughts}>
+            </input>
+            <button type="submit" onClick={handleClick}>Reframe</button>
 
-          <div className="growthmindset-response">
-            {response && <h3>{response}</h3>}
-          </div>
+            <div className="growthmindset-response">
+              {response && <h3>{response}</h3>}
+            </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

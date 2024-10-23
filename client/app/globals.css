@@ -40,7 +40,8 @@ body {
 
 .function-one,
 .function-two,
-.function-three {
+.function-three,
+.function-four {
   color: rgb(131, 186, 49);
   display: inline-block;
   background-color: rgb(103, 121, 76);
@@ -55,7 +56,8 @@ body {
 
 .function-one:hover,
 .function-two:hover,
-.function-three:hover {
+.function-three:hover,
+.function-four:hover {
   background-color: rgb(83, 101, 56);
   transform: scale(1.05);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
@@ -67,6 +69,26 @@ body {
   text-align: center;
   font-size: 32px;
   margin-top: 50px;
+}
+
+.login-body {
+  display: flex;
+  justify-content: center;
+}
+
+.login-box {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.login-username,
+.login-password {
+  width: 400px;
+  height: 20px;
+  margin-bottom: 10px;
 }
 
 .growthmindset-input-box {
