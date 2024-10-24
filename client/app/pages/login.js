@@ -23,6 +23,8 @@ export default function Login() {
 
   const handleClick = async () => {
     setError(null);
+    console.log('Username: ', username);
+    console.log('Password: ', password);
 
     if (!username || !password) {
       setError('Username and password required.');
@@ -37,6 +39,7 @@ export default function Login() {
           'Authorization': `Basic ${encodedCredentials}`,
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
       });
       if (!response.ok) {
         throw new Error('Login failed');
@@ -45,7 +48,7 @@ export default function Login() {
       const token = data.token;
       const redirectUrl = data.redirectUrl;
 
-      localStorage.setItem('jwtToken', token);
+      // localStorage.setItem('jwtToken', token);
 
       router.push(redirectUrl);
     } catch (error) {
@@ -61,10 +64,10 @@ export default function Login() {
       
       <div className='login-body'>
         <div className="login-box">
-          <input className="login-username" value={username} placeholder="Username" onChange={handleUsername}>
+          <input className="login-username" value={username} type='text' placeholder="Username" onChange={handleUsername}>
           </input>
           <br />
-          <input className="login-password" value={password} placeholder="Password" onChange={handlePassword}>
+          <input className="login-password" value={password} type='password' placeholder="Password" onChange={handlePassword}>
           </input>
           <br></br>
           <button type="submit" onClick={handleClick}>Submit</button>

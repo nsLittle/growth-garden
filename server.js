@@ -4,29 +4,26 @@ const express = require('express');
 const OpenAI = require('openai');
 const cors = require ('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const app = express();
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // swagger path?
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-// cors middleware?
-// const CORS_HEADERS = {
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Authentication, X-Username, X-Password, X-ApiKey",
-//   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
-// };
 
 // basic midleware?
 app.use((req, res, next) => {
@@ -50,7 +47,25 @@ app.get('/', (req, res)=>{
   res.send('Hello from the mycelium network');
 });
 
-app.post('/api/gpt', async(req, res) => {
+const plantedSeeds = [];
+
+app.post('/plantseeds', (req, res) => {
+  const { goal } = req.body;
+
+  if (!goal) {
+    return res.status(400).json({ error: 'Goal is required'});
+  }
+  plantedSeeds.push({ goal, timestamp: new Date() });
+  console.log(`Seed planted with goal: ${goal}`);
+
+  const imageUrl = `${req.protocol}://${req.get('host')}/images/seed.jpg`;
+
+  res.status(201).json({ message: 'Seed planted successfully', goal, imageUrl });
+});
+
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
+app.post('/growthmindset', async(req, res) => {
   const { prompt } = req.body;
 
   try {
@@ -78,7 +93,7 @@ app.post('/api/gpt', async(req, res) => {
 });
 
 // JWT_SECRET
-const JWT_SECRET = '9527e3a06a598251710743aa74e29e3681762684a01b184762469005a26afef3';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // USERS
 const users = [
@@ -114,6 +129,12 @@ app.post('/login', (req, res) => {
 
       console.log('Token: ', token);
 
+
+      res.cookie('jwtToken', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+      })
+
       // ROUTE to (/{user.name.first})
       const redirectUrl =`/${user.name.first}`;
       console.log('ReDirectUrl: ', redirectUrl);
@@ -130,24 +151,31 @@ app.post('/login', (req, res) => {
 
 // AUTHENTICATION MIDDLEWARE
 const authenticateJWT = (req, res, next) =>  {
+  let token = null;
+
   let authHeader = req.headers['authorization'];
   console.log('AUTHENTICATION');
   console.log('AuthHeader: ', authHeader);
 
   if (authHeader) {
-    const token = authHeader.split(' ')[1];
+    token = authHeader.split(' ')[1];
     console.log('AuthHeader Deconstructed: ', token);
+  } else if (req.cookies && req.cookies.jwtToken) {
+    token = req.cookies.jwtToken;
+    console.log('JWT Token from Cookie: ', token);
+  }
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
+  if (token) {
+    jwt.verify(token, JWT_SECRET, (err, user) = {
       if (err) {
-        return res.status(403).json({ error: 'Invalid token' });
+        return res.status(403).json({ error: 'Invalid token'});
       }
 
       req.user = user;
       next();
     });
   } else {
-    res.status(401).json({ error: 'Authorization header missing'  });
+    res.status(401).json({ error: 'Aughroization header or token missing'});
   }
 };
 
@@ -161,9 +189,8 @@ app.get('/:user', authenticateJWT, (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  res.status(200).json({ user: foundUser });
+  res.status(200).json({ message: `Welcome, ${foundUser.name.first}`});
 });
-
 
 const PORT =process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
