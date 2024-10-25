@@ -1,20 +1,22 @@
 require('dotenv').config();
 
 const express = require('express');
-const OpenAI = require('openai');
 const cors = require ('cors');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const OpenAI = require('openai');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 
 const app = express();
+
 app.use(cors({
   origin: 'http://localhost:3000',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -112,16 +114,9 @@ console.log('Password: ', users[0].login.password);
 // LOGIN
 app.post('/login', (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    console.log('AuthHeader: ', authHeader);
-    if(!authHeader || !authHeader.startsWith('Basic ')) {
-      return res.status(401).send({ error: 'Unauthorized' });
-    }
-    const base64Credentials = authHeader.split(' ')[1];
-    const credentials = Buffer.from(base64Credentials, 'base64').toString('utf-8');
-    const [username, password] = credentials.split(':');
+    const { username, password } = req.body;
 
-    const user = users.find(user => user.login.username === username);
+    const user = user.find(user => user.login.username === username);
 
     if (user && password === user.login.password) {
       // GENERATES TOKEN
@@ -129,10 +124,10 @@ app.post('/login', (req, res) => {
 
       console.log('Token: ', token);
 
-
       res.cookie('jwtToken', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
       })
 
       // ROUTE to (/{user.name.first})
@@ -151,19 +146,19 @@ app.post('/login', (req, res) => {
 
 // AUTHENTICATION MIDDLEWARE
 const authenticateJWT = (req, res, next) =>  {
-  let token = null;
+  let token = req.cookies.jwtToken;
 
   let authHeader = req.headers['authorization'];
   console.log('AUTHENTICATION');
   console.log('AuthHeader: ', authHeader);
 
-  if (authHeader) {
-    token = authHeader.split(' ')[1];
-    console.log('AuthHeader Deconstructed: ', token);
-  } else if (req.cookies && req.cookies.jwtToken) {
-    token = req.cookies.jwtToken;
-    console.log('JWT Token from Cookie: ', token);
-  }
+  // if (authHeader) {
+  //   token = authHeader.split(' ')[1];
+  //   console.log('AuthHeader Deconstructed: ', token);
+  // } else if (req.cookies && req.cookies.jwtToken) {
+  //   token = req.cookies.jwtToken;
+  //   console.log('JWT Token from Cookie: ', token);
+  // }
 
   if (token) {
     jwt.verify(token, JWT_SECRET, (err, user) => {
@@ -180,7 +175,7 @@ const authenticateJWT = (req, res, next) =>  {
 };
 
 // AUTHENTICATED ROUTES
-app.get('/:user', authenticateJWT, (req, res) => {
+app.get('/users/:user', authenticateJWT, (req, res) => {
   const { user } = req.params;
 
   const foundUser = users.find(u => u.name.first === user);
@@ -191,6 +186,15 @@ app.get('/:user', authenticateJWT, (req, res) => {
 
   res.status(200).json({ message: `Welcome, ${foundUser.name.first}`});
 });
+
+app.post('/logout', (req, res) => {
+  res.clearCookies('jwtToken', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  }),
+  res.status(200).json({ message: 'Logout successful.'})
+})
 
 const PORT =process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

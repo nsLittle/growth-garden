@@ -40,13 +40,13 @@ export default function Login() {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
+        body: JSON.stringify({ username, password }),
       });
       if (!response.ok) {
         throw new Error('Login failed');
       }
       const data = await response.json();
-      const token = data.token;
-      const redirectUrl = data.redirectUrl;
+      const { redirectUrl} = data;
 
       // localStorage.setItem('jwtToken', token);
 

@@ -15,7 +15,8 @@ export default function GrowthMindSet() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify({ prompt }),
+        credential: 'include'
       });
 
       if (response.ok) {
@@ -30,11 +31,11 @@ export default function GrowthMindSet() {
     }
   };
 
-  useEffect(() => {
-    if (prompt) {
-      fetchResponse();
-    }
-  }, [prompt]);
+  // useEffect(() => {
+  //   if (prompt) {
+  //     fetchResponse();
+  //   }
+  // }, [prompt]);
 
   const handleThoughts = (e) => {
     const thought = e.target.value;
@@ -46,6 +47,10 @@ export default function GrowthMindSet() {
     e.preventDefault();
     console.log(prompt);
     fetchResponse();
+
+    if (prompt.trim()!== '') {
+      await fetchResponse();
+    }
 
     // save response to BE under :user
   };
