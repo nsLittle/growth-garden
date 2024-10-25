@@ -10,7 +10,7 @@ export default function GrowthMindSet() {
 
   const fetchResponse = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/gpt', {
+      const response = await fetch('http://localhost:8000/growthmindset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -166,7 +166,7 @@ const authenticateJWT = (req, res, next) =>  {
   }
 
   if (token) {
-    jwt.verify(token, JWT_SECRET, (err, user) = {
+    jwt.verify(token, JWT_SECRET, (err, user) => {
       if (err) {
         return res.status(403).json({ error: 'Invalid token'});
       }
@@ -175,7 +175,7 @@ const authenticateJWT = (req, res, next) =>  {
       next();
     });
   } else {
-    res.status(401).json({ error: 'Aughroization header or token missing'});
+    res.status(401).json({ error: 'Authorization header or token missing'});
   }
 };
 
