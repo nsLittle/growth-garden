@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import Home from "./home";
+import Home from "../home/page";
 import "../globals.css"; 
 
 export default function GrowthMindSet() {
@@ -16,7 +16,7 @@ export default function GrowthMindSet() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ prompt }),
-        credential: 'include'
+        credentials: 'include'
       });
 
       if (response.ok) {
@@ -31,12 +31,6 @@ export default function GrowthMindSet() {
     }
   };
 
-  // useEffect(() => {
-  //   if (prompt) {
-  //     fetchResponse();
-  //   }
-  // }, [prompt]);
-
   const handleThoughts = (e) => {
     const thought = e.target.value;
     console.log(thought);
@@ -46,7 +40,6 @@ export default function GrowthMindSet() {
   const handleClick = async (e) => {
     e.preventDefault();
     console.log(prompt);
-    fetchResponse();
 
     if (prompt.trim()!== '') {
       await fetchResponse();

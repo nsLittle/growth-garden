@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import Home from "./home";
+import Home from "../home/page";
 import "../globals.css"; 
 import { useRouter } from "next/navigation";
 
