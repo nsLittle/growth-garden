@@ -98,7 +98,7 @@ app.post('/growthmindset', async(req, res) => {
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // USERS
-const users = [
+let users = [
   { 
     name: { first: 'Mutsumi', last: 'Hata' },
     login: { username: 'Mutsumi', password: 'Hata' }
@@ -116,7 +116,7 @@ app.post('/login', (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = user.find(user => user.login.username === username);
+    const user = users.find(user => user.login.username === username);
 
     if (user && password === user.login.password) {
       // GENERATES TOKEN
@@ -131,7 +131,7 @@ app.post('/login', (req, res) => {
       })
 
       // ROUTE to (/{user.name.first})
-      const redirectUrl =`/${user.name.first}`;
+      const redirectUrl =`/users/${user.name.first}`;
       console.log('ReDirectUrl: ', redirectUrl);
 
       res.status(200).json({ token, redirectUrl: `/${user.name.first}`});
@@ -175,7 +175,7 @@ const authenticateJWT = (req, res, next) =>  {
 };
 
 // AUTHENTICATED ROUTES
-app.get('/users/:user', authenticateJWT, (req, res) => {
+app.get('/users/:username', authenticateJWT, (req, res) => {
   const { user } = req.params;
 
   const foundUser = users.find(u => u.name.first === user);

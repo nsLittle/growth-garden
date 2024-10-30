@@ -46,11 +46,11 @@ export default function Login() {
         throw new Error('Login failed');
       }
       const data = await response.json();
-      const { redirectUrl} = data;
+      const { redirectUrl } = data;
 
-      // localStorage.setItem('jwtToken', token);
 
-      router.push(redirectUrl);
+      // router.replace(`/users/${redirectUrl}`);
+      router.push(`/users/${redirectUrl}`);
     } catch (error) {
       console.error('Error: ', error.message);
       setError('Invalid username or password');

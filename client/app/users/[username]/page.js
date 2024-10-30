@@ -1,27 +1,36 @@
 'use client';
-
-import  { useRouter } from 'next/router';
+import  { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Home from '@/app/home/page';
 
-export default function User() {
+export default function Username({ params }) {
   const router = useRouter();
-  const { userfirstname } = router.query;
   const  [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { username } = params;
+
+  console.log('Calling Users...');
 
   useEffect(() => {
-    if (router.isReady && userfirstname) {  
+
+    if (!username) {
+      console.log('Username not available');
+      return;
+    }
+
+    console.log('User First Name: ', username);
+    console.log('Router is Ready: ', router.isReady);
+  
+    setUserData(null);
+    setLoading(true);
+
       const token = localStorage.getItem('jwtToken');
 
-      if (!token) {
-        router.push('/');
-        return;
-      }
-
-      fetch(`http://localhost:8000/${userfirstname}`, {
+      fetch(`http://localhost:8000/users/${username}`, {
         credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
       })
         .then((response) => response.json())
@@ -33,17 +42,20 @@ export default function User() {
         .finally(() => {
           setLoading(false);
         });
-    }
-  }, [router.isReady, userfirstname]);
+  }, [username]);
 
-  if (!userfirstname) {
+  if (loading) {
     return <h1>Still loading your garden...</h1>;
   }
   
+  if (!userData) {
+    return <h1>User not found...</h1>
+  }
   
   return (
     <>
-      <h1>Welcome, {userfirstname}</h1>
+      <Home />
+      <h1>Welcome, {username}</h1>
       <h2>Let's Grow Your Garden</h2>
       <p>Here's some personalized data:</p>
       <pre>{JSON.stringify(userData, null, 2)}</pre>
