@@ -1,0 +1,24 @@
+[
+  {
+    "gender": "female",
+    "name": {
+      "first": "Mutsumi",
+      "last": "Hata"
+    },
+    "login": {
+      "username": "Mutsumi",
+      "password": "Hata"
+    },
+    "goals": ["daily walks", "professional software developer"],
+    "cart": {
+      "items": [
+        {
+          "product": "Habanero",
+          "quantity": 1,
+          "price": 153
+        }
+      ],
+      "total": 153
+    }
+  }
+]
