@@ -1,0 +1,46 @@
+[
+  {
+    "gender": "female",
+    "name": {
+      "first": "Mutsumi",
+      "last": "Hata"
+    },
+    "login": {
+      "username": "Mutsumi",
+      "password": "Hata"
+    },
+    "goals": ["daily walks", "professional software developer"],
+    "cart": {
+      "items": [
+        {
+          "product": "Pie",
+          "quantity": 1,
+          "price": 30
+        }
+      ],
+      "total": 153
+    }
+  },
+  {
+    "gender": "male",
+    "name": {
+      "first": "Bob",
+      "last": "Smith"
+    },
+    "login": {
+      "username": "Bob",
+      "password": "Smith"
+    },
+    "goals": ["running", "librarian"],
+    "cart": {
+      "items": [
+        {
+          "product": "Boots",
+          "quantity": 1,
+          "price": 150
+        }
+      ],
+      "total": 153
+    }
+  }
+]

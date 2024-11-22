@@ -1,21 +1,14 @@
 {
-  "name": "personal-growth",
-  "version": "0.1.0",
-  "private": true,
+  "name": "client",
+  "version": "1.0.0",
+  "main": "layout.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
-  "dependencies": {
-    "next": "^14.2.13",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0"
-  },
-  "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.13"
-  }
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
 }

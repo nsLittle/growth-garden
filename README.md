@@ -42,8 +42,9 @@ This simple application ...
 
 # To Do
 
-1. Goal Declaration
-2. Drink Counter
-3. Login
-4. Footer (like portfolio)
-5. Save button for optional saving of /growthmindset input and responses (for authorized users only)
+1. Title_add shadow?
+2. Welcome_new font
+3. Intro Link_new image/background
+4. Intro Link_full width plus add height
+5. Intro Link_add text
+6. Smooth Page_embed audio
