@@ -130,7 +130,7 @@ app.post('/login', (req, res) => {
       })
 
       // ROUTE to (/{user.name.first})
-      const redirectUrl =`/users/${user.name.first}`;
+      const redirectUrl =`/${user.name.first}`;
       console.log('ReDirectUrl: ', redirectUrl);
 
       res.status(200).json({ token, redirectUrl: `/${user.name.first}`});

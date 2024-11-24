@@ -21,7 +21,7 @@ function MyGarden({ Component, pageProps }) {
                 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></link>
                 <link rel="stylesheet" href="styles.css"></link>
 
-                <title>Hope Resources</title>
+                <title>Alignment Journey</title>
 
             </header>
 

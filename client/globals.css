@@ -8,6 +8,7 @@
   height: 100vh;
   overflow: hidden;
   background-image: url('/images/moss-statue.jpg');
+  filter: blur(1px);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -86,7 +87,7 @@
   justify-content: center;
   text-decoration: none;
   width: 100vw;
-  height: 50vw;
+  height: 35vw;
   background-image: url('/images/moss-ground.png');
   background-size: cover;
   background-position: center;
@@ -100,6 +101,7 @@
   text-align: center;
   font-size: 64px;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.6);
+  margin-top: 0;
 }
 
 .intro-title:hover {
@@ -109,14 +111,17 @@
   cursor: pointer;
 }
 
+.intro-function {
+  margin-top: 300px;
+}
+
 .intro-text,
 .at-cause-text {
   font-size: 32px;
-  color: rgb(84, 80, 80);
+  color: #F5F5F5;
   text-align: center;
   width: 80vw;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  filter: invert(100%) grayscale(100%)
+  margin: 5px;
 }
 
 .banner-mini {
@@ -126,9 +131,10 @@
   justify-content: center;
   align-items: center; 
   width: 100vw;
-  height: 45vh;
+  height: 35vh;
   overflow: hidden;
-  background-image: url('/images/stone.2.jpg');
+  background-image: url('/images/moss-statue.jpg');
+  filter: blur(3px);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -140,50 +146,73 @@
   font-size: 60px;
   font-weight: bold;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-  padding-top: 220px;
+  padding-top: 30px;
 }
 
-
-
-.login-body,
+.body-mini,
 .reframer-body {
   display: flex;
   justify-content: center;
 }
 
+.reframer-box {
+  margin-bottom: 300px;
+}
+
+
 .login-box,
+.plantgoals-box,
 .reframer-box {
   display: flex;
   justify-content: center;
   display: inline-flex;
   align-items: center;
   flex-direction: column;
+  padding-top: 50px;
 }
 
+.plantgoals-input,
 .login-username,
-.login-password,
-.login-submit {
+.login-password {
   width: 400px;
   height: 20px;
   margin-bottom: 10px;
-
 }
+
+/* .plantgoals-submit,
+.login-submit {
+  width: 400px;
+  height: 25px;
+  margin-bottom: 10px;
+} */
 
 .reframer-response,
 .reframer-input-box,
-.plantseeds-input-box {
+.plantgoals-input-box {
   text-align: center;
 }
 
+.reframer-input {
+  height: 30px;
+}
+
 .reframer-input-box,
-.plantseeds-input-box {
+.plantgoals-input-box {
   color: rgb(22, 89, 22);
 }
 
-.reframer-response {
+.reframer-output {
   font-size: 32px;
-  margin-top: 30px;
-  color: rgb(103, 121, 76);
+  color: rgb(228, 232, 223);
+  width: 90px;
+  font-size: 16px;
+  border: none; 
+}
+
+.reframer-submit {
+  height: 30px;
+  background-color: #d3d3d3;
+  border-radius: 5px;
 }
 
 input {

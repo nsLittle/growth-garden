@@ -42,9 +42,19 @@ This simple application ...
 
 # To Do
 
-1. Title_add shadow?
-2. Welcome_new font
-3. Intro Link_new image/background
-4. Intro Link_full width plus add height
-5. Intro Link_add text
-6. Smooth Page_embed audio
+1. Add Resource Search
+2. Curated Mindfulness
+3. 
+
+# Fix Login
+
+1. onEnter should be added to onClick capabilities
+2. alert() on login failure - user not found
+3. alert() on login failure - input fields must both have xyz
+4. alert() on login failure - improper username or password
+
+# Convert to new website
+
+1. Complete Smooothe page
+2. Add Team Dimensions page
+3. Add 

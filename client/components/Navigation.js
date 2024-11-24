@@ -1,6 +1,6 @@
 'use client';
 import Link from "next/link";
-import Reframer from "./reframer";
+import Reframer from "../pages/reframer";
 
 export default function Navigation() {
 
@@ -21,24 +21,11 @@ export default function Navigation() {
       <p className="at-cause">You’re here, and you’re ready to be at cause in your life.</p>
     </div>
 
-    <div className='intro-link'>
-      <Link href='/smoothe' className='intro'>
-        <h3 className='intro-title'>Smoothe Motivations</h3>
-        <p className="intro-text">Roy Smoothe, Motivational HopeMaker,</p>
-        <p className="intro-text">is someone who embodies the power of gentle leadership,</p>
-        <p className="intro-text">creating ripples of positivity wherever he goes with his motivational music.</p>
-      </Link>
-    </div>
-
-    <div className="section">
-      <h2 className="subtitle">More Stuff</h2>
-      <p className="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-
     <div className="intro-link">
-      <Link href='/plantseeds' className='intro'>
+      <Link href='/plantgoals' className='intro'>
         <h3 className='intro-title'>Plant Goals</h3>
-        <p className="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p className="intro-text">Through the clarity of your desires</p>
+        <p className="intro-text">sow the seeds of your future</p>
       </Link>
     </div>
 
@@ -48,9 +35,34 @@ export default function Navigation() {
     </div>
 
     <div className="intro-link">
-      <h3 className="intro-title">Reframer</h3>
-        <Reframer />
+      <div className="intro">
 
+      {/* <Link href='/reframer' className='intro'> */}
+      <h3 className="intro-title intro-function">Growth Shift</h3>
+        <Reframer />
+      {/* </Link> */}
+      </div>
+    </div>
+
+
+    <div className="section">
+      <h2 className="subtitle">More Stuff and Stuff</h2>
+      <p className="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+
+
+    <div className='intro-link'>
+      <Link href='/smoothe' className='intro'>
+        <h3 className='intro-title'>Motivational Beats</h3>
+        <p className="intro-text">Motivational HopeMaker</p>
+        <p className="intro-text">Roy Smoothe</p>
+        <p className="intro-text">shares his spoken word mix to move you into action</p>
+      </Link>
+    </div>
+
+    <div className="section">
+      <h2 className="subtitle">More Stuff</h2>
+      <p className="more">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
 
     </>

@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 
 export default function Username() {
   const router = useRouter();
-  const  [userData, setUserData] = useState(null);
+  const  [username, setUsername] = useState('');
   const [loading, setLoading] = useState(true);
-  const username = router.query?.username;
 
+  
+  console.log(username);
   console.log('Calling Users...');
 
   useEffect(() => {

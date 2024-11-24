@@ -46,7 +46,7 @@ export default function Login() {
       const data = await response.json();
       const { redirectUrl } = data;
 
-      router.push(`/users/${redirectUrl}`);
+      router.push(`${redirectUrl}`);
     } catch (error) {
       console.error('Error: ', error.message);
       setError('Invalid username or password');
@@ -56,11 +56,11 @@ export default function Login() {
   return (
     <>
       <div className='banner-mini'>
-        <h2 className="title-mini">Login</h2>
       </div>
 
+      <h2 className="title-mini">Login</h2>
 
-      <div className='login-body'>
+      <div className='body-mini'>
         <div className="login-box">
           <input className="login-username" value={username} type='text' placeholder="Username" onChange={handleUsername}>
           </input>
