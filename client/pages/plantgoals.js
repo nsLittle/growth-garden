@@ -41,8 +41,9 @@ export default function PlantSeeds() {
   return (
     <>
       <div className='banner-mini'>
-        <h2 className="title-mini">Plant Goals</h2>
       </div>
+
+      <h2 className="title-mini">Plant Goals</h2>
 
       <div className="body-mini">
         <div className="plantgoals-box">

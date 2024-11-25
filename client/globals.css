@@ -156,6 +156,9 @@
 }
 
 .reframer-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 300px;
 }
 
@@ -177,6 +180,10 @@
   width: 400px;
   height: 20px;
   margin-bottom: 10px;
+}
+
+.reframer-input {
+  margin-top: 50px;
 }
 
 /* .plantgoals-submit,

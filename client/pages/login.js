@@ -46,6 +46,7 @@ export default function Login() {
       const data = await response.json();
       const { redirectUrl } = data;
 
+      localStorage.setItem('loggedInUsername', username);
       router.push(`${redirectUrl}`);
     } catch (error) {
       console.error('Error: ', error.message);
@@ -62,13 +63,27 @@ export default function Login() {
 
       <div className='body-mini'>
         <div className="login-box">
-          <input className="login-username" value={username} type='text' placeholder="Username" onChange={handleUsername}>
+          <input
+            className="login-username"
+            value={username} 
+            type='text' 
+            placeholder="Username" 
+            onChange={handleUsername}>
           </input>
           <br />
-          <input className="login-password" value={password} type='password' placeholder="Password" onChange={handlePassword}>
+          <input
+            className="login-password" 
+            value={password} 
+            type='password' 
+            placeholder="Password" 
+            onChange={handlePassword}>
           </input>
           <br></br>
-          <button type="login-submit" onClick={handleClick}>Submit</button>
+          <button 
+            type="login-submit" 
+            onClick={handleClick}>
+              Submit
+          </button>
         </div>
       </div>
     </>

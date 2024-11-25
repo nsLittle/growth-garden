@@ -4,61 +4,51 @@ import { useEffect, useState } from 'react';
 
 export default function Username() {
   const router = useRouter();
-  const  [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  
-  console.log(username);
-  console.log('Calling Users...');
+  const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-
     if (!username) {
-      console.log('Username not available');
       return;
     }
 
-    console.log('User First Name: ', username);
-    console.log('Router is Ready: ', router.isReady);
-  
-    setUserData(null);
     setLoading(true);
+    setUserData(null);
 
-      const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem('jwtToken');
 
-      fetch(`http://localhost:8000/users/${username}`, {
-        credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-      })
-        .then((response) => response.json())
-        .then((data) => setUserData(data))
-        .catch((error) =>{
-          console.log('Error fetching user', error);
-          router.push('/');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    fetch(`http://localhost:8000/${username}`, {
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setUserData(data);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error('Error fetching user data: ', error);
+      setLoading(false);
+    });
   }, [username]);
-
-  if (loading) {
-    return <h1>Still loading your garden...</h1>;
-  }
-  
-  if (!userData) {
-    return <h1>User not found...</h1>
-  }
   
   return (
     <>
-      <Home />
-      <h1>Welcome, {username}</h1>
-      <h2>Let's Grow Your Garden</h2>
-      <p>Here's some personalized data:</p>
-      <pre>{JSON.stringify(userData, null, 2)}</pre>
+      <div className='banner-mini'>
+      </div>
+
+      <h2 className='title-mini'>Welcome, {username}</h2>
+
+      <div className="body-mini">
+          <h2>Let's start your habit journey</h2>
+          <p>Here's some personalized data:</p>
+          <pre>{JSON.stringify(userData, null, 2)}</pre>
+
+      </div>
     </>
   )
 }

@@ -53,8 +53,8 @@ export default function Reframer() {
       </div>
 
       <div className="reframer-box">
-        <p>Turning negativetThoughts into</p>
-        <p>Fuel for Growth</p>
+        <p className="intro-text">Turn negative thoughts into</p>
+        <p className="intro-text">fuel for growth</p>
         <input className="reframer-input" value={prompt} placeholder="Your thoughts" onChange={handleThoughts}>
         </input>
         
